@@ -47,6 +47,15 @@ function setup() {
   });
   Matter.Composite.add(engine.world, mouseConstraint);
   createBoundaries(80);
+  for (let i = 0; i < 50; i++) {
+    createRandomObj(width * 0.5, height * 0.5);
+  }
+  if (typeof window !== "undefined") {
+    window.addEventListener("deviceorientation", updateGravity);
+  }
+  gravity = engine.gravity;
+  gravity.x = 0;
+  gravity.y = 0;
 }
 
 function createRandomObj(x, y) {
@@ -69,11 +78,31 @@ function createRandomObj(x, y) {
   }
 }
 
+var updateGravity = function (event) {
+  var orientation =
+      typeof window.orientation !== "undefined" ? window.orientation : 0,
+    gravity = engine.gravity;
+
+  if (orientation === 0) {
+    gravity.x = constraint(event.gamma, -90, 90) / 90;
+    gravity.y = constraint(event.beta, -90, 90) / 90;
+  } else if (orientation === 180) {
+    gravity.x = constraint(event.gamma, -90, 90) / 90;
+    gravity.y = constraint(-event.beta, -90, 90) / 90;
+  } else if (orientation === 90) {
+    gravity.x = constraint(event.beta, -90, 90) / 90;
+    gravity.y = constraint(-event.gamma, -90, 90) / 90;
+  } else if (orientation === -90) {
+    gravity.x = constraint(-event.beta, -90, 90) / 90;
+    gravity.y = constraint(event.gamma, -90, 90) / 90;
+  }
+};
+
 function draw() {
   background("#ffffff");
-  if (mouseIsPressed && mouseButton === CENTER) {
-    createObj(mouseX, mouseY);
-  }
+  // if (mouseIsPressed && mouseButton === CENTER) {
+  //   createObj();
+  // }
   Matter.Engine.update(engine);
   noStroke();
   matterObjs.forEach((obj, idx) => {
