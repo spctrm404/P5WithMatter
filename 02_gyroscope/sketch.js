@@ -84,17 +84,17 @@ var updateGravity = function (event) {
     gravity = engine.gravity;
 
   if (orientation === 0) {
-    gravity.x = constraint(event.gamma, -90, 90) / 90;
-    gravity.y = constraint(event.beta, -90, 90) / 90;
+    gravity.x = constrain(event.gamma, -90, 90) / 90;
+    gravity.y = constrain(event.beta, -90, 90) / 90;
   } else if (orientation === 180) {
-    gravity.x = constraint(event.gamma, -90, 90) / 90;
-    gravity.y = constraint(-event.beta, -90, 90) / 90;
+    gravity.x = constrain(event.gamma, -90, 90) / 90;
+    gravity.y = constrain(-event.beta, -90, 90) / 90;
   } else if (orientation === 90) {
-    gravity.x = constraint(event.beta, -90, 90) / 90;
-    gravity.y = constraint(-event.gamma, -90, 90) / 90;
+    gravity.x = constrain(event.beta, -90, 90) / 90;
+    gravity.y = constrain(-event.gamma, -90, 90) / 90;
   } else if (orientation === -90) {
-    gravity.x = constraint(-event.beta, -90, 90) / 90;
-    gravity.y = constraint(event.gamma, -90, 90) / 90;
+    gravity.x = constrain(-event.beta, -90, 90) / 90;
+    gravity.y = constrain(event.gamma, -90, 90) / 90;
   }
 };
 
