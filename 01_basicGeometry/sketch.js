@@ -72,7 +72,7 @@ function createRandomObj(x, y) {
 function draw() {
   background("#ffffff");
   if (mouseIsPressed && mouseButton === CENTER) {
-    createObj(mouseX, mouseY);
+    createRandomObj(mouseX, mouseY);
   }
   Matter.Engine.update(engine);
   noStroke();

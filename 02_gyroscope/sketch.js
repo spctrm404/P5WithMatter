@@ -16,6 +16,8 @@ let colors = [
 
 let canvas;
 
+let alpha, beta, gamma;
+
 function createBoundaries(thickness) {
   boundaryObjs.push(
     new Rect(width * 0.5, 0, width, thickness * 2, { isStatic: true })
@@ -50,6 +52,9 @@ function setup() {
   for (let i = 0; i < 50; i++) {
     createRandomObj(width * 0.5, height * 0.5);
   }
+  alpha = 0;
+  beta = 0;
+  gamma = 0;
   if (typeof window !== "undefined") {
     window.addEventListener("deviceorientation", updateGravity);
   }
